@@ -1,0 +1,15 @@
+{
+  "name": "back-mini",
+  "main": "app.js",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "danfojs": "^1.1.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  },
+  "author": "Tomilola Olaniyi"
+}

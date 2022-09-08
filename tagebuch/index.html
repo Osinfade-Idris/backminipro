@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tagebuch | Log in</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Inter:wght@800&family=Montserrat:wght@500;600&family=Mulish:wght@900&family=Quicksand&display=swap" rel="stylesheet">
+</head>
+<body id = 'loginbody'>
+    <header>
+        <div id="logo"><ion-icon name="book"></ion-icon></div>
+        <div id = "appname">Tagebuch</div>
+    </header>
+    <main>
+        <form id="login" action="dashboard.html" method="POST">
+            <div id="welcomemessage">Wilkommen</div>
+            <label for="username">Nutzername:</label>
+            <input  type="text" id = 'username' name = 'username'>
+            <label  for="password">Passwort:</label>
+            <input  type="password" id = 'password' name = 'password'>
+            <input id="btn_login" type="button" value="EINLOGGEN">
+            <div id="errorlogger"></div>
+            <div id="forgotpasswordandsignup">
+                <div id="registerlink">Neuer benutzer? Registerien</div>
+                <div id="forgotpasswordlink">Haben sie ihr passwort vergessen?</div>
+            </div>
+        </form>
+  
+    </main>
+    <script type="module" src="script.js"></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+</body>
+</html>

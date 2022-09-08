@@ -1,0 +1,699 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1em;
+    position: fixed;
+    margin-bottom: 2rem;
+    background-color: white;
+    width: 100%;
+
+}
+#dashboardbody header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+main{
+    margin-top: 2em;
+    margin-bottom: 3em;
+    display: flex;
+    align-items: center;
+}
+#logo{
+    display: flex;
+    align-items: center;
+    font-size: 2em;
+}
+#appLogo{
+    display: flex;
+    flex-direction: row;
+}
+#appname{
+    font-family: 'Mulish', sans-serif;
+    font-size: 1.5em;
+    margin-left: 1em;
+    letter-spacing: 3px;
+}
+form{
+    max-width: 600px;
+    width: 100%;
+    padding: 3em;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5em;
+    margin-bottom: 1em;
+
+}
+#welcomemessage{
+    margin-bottom: 1em;
+    font-weight: bold;
+    font-size: larger;
+    display: flex;
+    justify-content: center;
+
+}
+#username, #password{
+    margin-bottom: 1em;
+    padding: 1em;
+    background-color: rgba(0,0,0,0.1);
+    border: none;
+    outline-color: black;
+}
+input[type='email']:focus, input[type='text']:focus, input[type='password']:focus{
+    border-top-left-radius: 1.5em;
+    border-bottom-right-radius: 1.5em;
+    transition: 1s;
+}
+input[type='text']:hover,input[type='password']:hover{
+    outline-color: black;
+
+}
+main{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+label{
+    color: rgba(0,0,0,0.4);
+    margin-bottom: 0.3em;
+}
+input[type ="button"]{
+    padding: 1em;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    border-top-left-radius: 1.5em;
+    border-bottom-right-radius: 1.5em;
+    cursor: pointer;
+}
+
+#forgotpasswordandsignup{
+    margin-top: 1em;
+}
+#registerlink, #signinlink{
+    font-size: 0.8em;
+    cursor: pointer;
+    margin-bottom: 1em;
+}
+
+#forgotpasswordlink{
+    font-size: 0.7em;
+    color: rgba(0,0,0,0.5);
+    cursor: pointer;
+    margin-bottom: 1em;
+    font-weight: 200;
+}
+
+#signupform input{
+    margin-bottom: 1em;
+    padding: 1em;
+    background-color: rgba(0,0,0,0.1);
+    border: none;
+    outline-color: black;
+
+}
+#signupform input[type = 'button']{
+    background-color: #000;
+}
+#login.fadeIn{
+    opacity : 0;
+    transition: 0.2s all ease-in-out;
+}
+#signupform.fadeIn{
+    opacity : 0;
+    transition: 0.2s all ease-in-out;
+}
+#errorlogger{
+    font-size: 1em;
+    margin-top: 0.5em;
+    color: red;
+}
+#nav{
+    position: fixed;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    box-shadow:     0px -0px 12px -6px #000;
+    padding: 0.1em 0em;
+    height: 3em;
+    bottom: 0em;
+    z-index: 1;
+    background-color: white;
+
+}
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.nav{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+#navtitle{
+    position: absolute;
+    font-size: 0.7em;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    opacity: 0;
+}
+.nav ion-icon{
+    position: relative;
+    font-size: 2em;
+}
+.indicator{
+    position: absolute;
+    height: 3em;
+    width: 3em;
+    background-color: grey;
+    top: -50%;
+    border-radius: 50%;
+    opacity: 0;
+}
+.indicator:before{
+    position: absolute;
+    content: '';
+    top: 25%;
+    left: -0.9em;
+    width: 1em;
+    height: 1em;
+    border-left: 2px solid grey;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    background-color: white;
+
+}
+.indicator:after{
+    position: absolute;
+    content: '';
+    top: 25%;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    right: -0.9em;
+    width: 1em;
+    background-color: white;
+    height: 1em;
+    border-right: 2px solid grey;
+}
+.nav.active ion-icon{
+    transform: translateY(-0.7em);
+    transition: 0.5s;
+    color: white;
+    z-index: 1;
+    
+}
+.nav.active .indicator{
+    opacity: 1;
+    overflow: hidden;
+
+}
+.nav.active #navtitle{
+    opacity: 1;
+    transform: translateY(1.2em);
+}
+
+#displayboard{
+    flex: 1;
+    padding: 1.5em;
+}
+#wordcard{
+    width: 100%;
+    height: 16vh;
+    background-color: white;
+    box-shadow:1px 1px 2px 0px #000;
+    border-top-left-radius: 1.5em;
+    border-bottom-right-radius: 1.5em;
+    overflow: hidden;
+}
+
+#recentwords{
+    margin-top: 2em;
+    width: 100%;
+    height: 20vh;
+    background-color: white;
+    box-shadow:1px 1px 2px 0px #000;
+    border-top-left-radius: 1.5em;
+    border-bottom-right-radius: 1.5em;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.01);
+
+}
+#wordcardtitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 0.5em;
+    background-color: rgba(0,0,0,0.1);
+    font-weight: 700;
+}
+#recentwordtitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5em;
+    font-weight: 500;
+    font-size: 1em;
+}
+#wordoftheday{
+    margin-top: 1em;
+    padding-left: 1em;
+}
+#wordoftheday::first-letter{
+    text-transform: uppercase;
+}
+#recentlyadded{
+    padding: 1em;
+    font-style: italic;
+    font-size: 0.8em;
+    font-weight: 200;
+}
+#wordmeaning{
+    padding-left: 1.2em;
+    font-size: 0.8em;
+}
+#wordmeaning span{
+    margin-left: 0.5em;
+    font-weight: 700;
+}
+#wordmeaning span::first-letter{
+    text-transform: uppercase;
+}
+.word{
+    font-weight: 800;
+    flex: 1;
+}
+.word::first-letter, .meaning::first-letter{
+    text-transform: uppercase;
+}
+.meaning{
+    font-weight: 400;
+    flex: 2.5;
+}
+.wordwrapper{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-style: normal;
+    padding: 0.2em;
+    padding-left: 1em;
+    background-color: rgba(0,0,0,0.1);
+    margin-bottom: 0.1em;
+    border-top-right-radius: 20% ;
+    border-bottom-right-radius: 20% ;
+
+
+}
+
+/*task panel*/
+
+#taskpanel{
+    width: 100%;
+    padding: 1rem;
+}
+#submittedtasks{
+    margin-top: 1rem;
+    padding: 1rem;
+}
+#dailytask{
+    margin-bottom: 1.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#dailytask button{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    border-top-left-radius: 1.5em;
+    border-bottom-right-radius: 1.5em;
+    cursor: pointer;
+    width: 70%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;    
+}
+#submittedtasks{
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.taskwrapper{
+    width: 100%;
+}
+.daycard{
+    background-color: rgba(0,0,0,0.1);
+    padding: 0.7rem;
+    flex: 1 0 15rem;
+    height: 7rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+#submitted{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem
+}
+#submissionword{
+    font-weight: 800;
+    flex: 2.5;
+    font-size: 0.7rem;
+}
+#submissionmeaning{
+    flex: 3;
+    font-size: 0.7rem;
+
+}
+#submissionword::first-letter, #submissionmeaning::first-letter{
+    text-transform: capitalize;
+}
+#day{
+    letter-spacing: 2px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+.newtaskpanel{
+    margin-top: 3rem;
+    width: 100%;
+    padding: 1rem;
+    
+}
+.newinputwrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+
+}
+#newword, #newmeaning{
+    margin-bottom: 1em;
+    padding: 1em;
+    background-color: rgba(0,0,0,0.1);
+    border: none;
+    outline-color: black;
+}
+#newword{
+    flex: 1;
+}
+#newmeaning{
+    flex: 2;
+}
+#taskheading{
+    width: 60%;
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+#newbutton{
+    width: 100%;
+}
+#closetask{
+    font-size: 0.9rem;
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+}
+.reward{
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #000;
+}
+#daywrapper{
+    margin-bottom: 1rem;
+}
+.hidecard{
+    display: none;
+}
+#daywrapper.fullcard .daycard{
+    height: 100%;
+    background-color: transparent;
+    padding: 0;
+    cursor: auto;
+}
+#daywrapper.fullcard #day{
+    font-size: 1em;
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#daywrapper.fullcard .daycard #submitted{
+    margin-bottom: 1em;
+}
+@media screen and (max-width: 420px){
+    body {
+        font-size: 12px;
+    }
+    #logo{
+        font-size: 1.5rem;
+    }
+    #newword, #newmeaning{
+        margin-bottom: 1em;
+        padding: 0.5em;
+        background-color: rgba(0,0,0,0.1);
+        border: none;
+        outline-color: black;
+    }
+    #newword{
+        flex: 1;
+    }
+    #newmeaning{
+        flex: 1;
+    }
+    input[type='text']:focus,input[type='password']:focus{
+        border-top-left-radius: 0.8em;
+        border-bottom-right-radius: 0.8em;
+        transition: 1s;
+    }
+    input[type ="button"]{
+        padding: 0.5em;
+        background-color: black;
+        color: white;
+        font-weight: bold;
+        letter-spacing: 0.2em;
+        border-top-left-radius: 0.8em;
+        border-bottom-right-radius: 0.8em;
+        cursor: pointer;
+    
+    }
+    
+}
+
+/*spinner*/
+
+#fountainG{
+	position:relative;
+	width:234px;
+	height:28px;
+	margin:auto;
+}
+
+.fountainG{
+	position:absolute;
+	top:0;
+	background-color:rgb(0,0,0);
+	width:28px;
+	height:28px;
+	animation-name:bounce_fountainG;
+		-o-animation-name:bounce_fountainG;
+		-ms-animation-name:bounce_fountainG;
+		-webkit-animation-name:bounce_fountainG;
+		-moz-animation-name:bounce_fountainG;
+	animation-duration:1.5s;
+		-o-animation-duration:1.5s;
+		-ms-animation-duration:1.5s;
+		-webkit-animation-duration:1.5s;
+		-moz-animation-duration:1.5s;
+	animation-iteration-count:infinite;
+		-o-animation-iteration-count:infinite;
+		-ms-animation-iteration-count:infinite;
+		-webkit-animation-iteration-count:infinite;
+		-moz-animation-iteration-count:infinite;
+	animation-direction:normal;
+		-o-animation-direction:normal;
+		-ms-animation-direction:normal;
+		-webkit-animation-direction:normal;
+		-moz-animation-direction:normal;
+	transform:scale(.3);
+		-o-transform:scale(.3);
+		-ms-transform:scale(.3);
+		-webkit-transform:scale(.3);
+		-moz-transform:scale(.3);
+	border-radius:19px;
+		-o-border-radius:19px;
+		-ms-border-radius:19px;
+		-webkit-border-radius:19px;
+		-moz-border-radius:19px;
+}
+
+#fountainG_1{
+	left:0;
+	animation-delay:0.6s;
+		-o-animation-delay:0.6s;
+		-ms-animation-delay:0.6s;
+		-webkit-animation-delay:0.6s;
+		-moz-animation-delay:0.6s;
+}
+
+#fountainG_2{
+	left:29px;
+	animation-delay:0.75s;
+		-o-animation-delay:0.75s;
+		-ms-animation-delay:0.75s;
+		-webkit-animation-delay:0.75s;
+		-moz-animation-delay:0.75s;
+}
+
+#fountainG_3{
+	left:58px;
+	animation-delay:0.9s;
+		-o-animation-delay:0.9s;
+		-ms-animation-delay:0.9s;
+		-webkit-animation-delay:0.9s;
+		-moz-animation-delay:0.9s;
+}
+
+#fountainG_4{
+	left:88px;
+	animation-delay:1.05s;
+		-o-animation-delay:1.05s;
+		-ms-animation-delay:1.05s;
+		-webkit-animation-delay:1.05s;
+		-moz-animation-delay:1.05s;
+}
+
+#fountainG_5{
+	left:117px;
+	animation-delay:1.2s;
+		-o-animation-delay:1.2s;
+		-ms-animation-delay:1.2s;
+		-webkit-animation-delay:1.2s;
+		-moz-animation-delay:1.2s;
+}
+
+#fountainG_6{
+	left:146px;
+	animation-delay:1.35s;
+		-o-animation-delay:1.35s;
+		-ms-animation-delay:1.35s;
+		-webkit-animation-delay:1.35s;
+		-moz-animation-delay:1.35s;
+}
+
+#fountainG_7{
+	left:175px;
+	animation-delay:1.5s;
+		-o-animation-delay:1.5s;
+		-ms-animation-delay:1.5s;
+		-webkit-animation-delay:1.5s;
+		-moz-animation-delay:1.5s;
+}
+
+#fountainG_8{
+	left:205px;
+	animation-delay:1.64s;
+		-o-animation-delay:1.64s;
+		-ms-animation-delay:1.64s;
+		-webkit-animation-delay:1.64s;
+		-moz-animation-delay:1.64s;
+}
+
+
+
+@keyframes bounce_fountainG{
+	0%{
+	transform:scale(1);
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+	transform:scale(.3);
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-o-keyframes bounce_fountainG{
+	0%{
+	-o-transform:scale(1);
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+	-o-transform:scale(.3);
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-ms-keyframes bounce_fountainG{
+	0%{
+	-ms-transform:scale(1);
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+	-ms-transform:scale(.3);
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-webkit-keyframes bounce_fountainG{
+	0%{
+	-webkit-transform:scale(1);
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+	-webkit-transform:scale(.3);
+		background-color:rgb(255,255,255);
+	}
+}
+
+@-moz-keyframes bounce_fountainG{
+	0%{
+	-moz-transform:scale(1);
+		background-color:rgb(0,0,0);
+	}
+
+	100%{
+	-moz-transform:scale(.3);
+		background-color:rgb(255,255,255);
+	}
+}
