@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tagebuch</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Inter:wght@800&family=Montserrat:wght@500;600&family=Mulish:wght@900&family=Quicksand&display=swap" rel="stylesheet">
+</head>
+<body id = 'dashboardbody'>
+    <header>
+        <div id="appLogo">
+            <div id="logo"><ion-icon name="book"></ion-icon></div>
+            <div id = "appname">Tagebuch</div>
+        </div>
+        <div id="userdropdown">
+            <ion-icon name="person"></ion-icon>
+
+        </div>
+       
+    </header>
+    <template id = 'template-dashboard'>
+        
+       
+
+    </template>
+    <template id = 'template-task'>
+
+    </template>
+    <main>
+        <div class="container">
+            <div id="taskpanel">
+                <div id = 'displayboard' >
+                    <div id="wordcard">
+                        <div id="wordcardtitle">Zufälliges Wort</div>
+                        <div id="wordoftheday"></div>
+                        <div id="wordmeaning">
+                            <p>Bedeutung: <span></span></p>             
+                        </div>
+                    </div>
+                    <div id="recentwords">
+                        <div id="recentwordtitle">kürzlich hinzugefügte Wörter </div>
+                        <div id="recentlyadded"></div>
+                        
+                    </div>
+                    <div id="taskstatus"></div>
+                    <div id="currentreward"></div>
+                </div>
+               
+            </div>
+            
+        </div>
+        <div id="nav">
+            <div  class = "nav active"id="home">
+                <ion-icon name="home"></ion-icon>
+                <div id="navtitle">
+                    Heimat
+                </div>
+                <div class="indicator"></div>
+
+            </div>
+            <div class = "nav" id="task">
+                <ion-icon name="timer"></ion-icon>
+                <div id="navtitle">
+                    Aufgabe
+                </div>
+                <div class="indicator"></div>
+            </div>
+            <div class = "nav" id="reward">
+                <ion-icon name="card"></ion-icon>
+               <div id="navtitle">
+                   Belohnen
+               </div>
+               <div class="indicator"></div>
+
+            </div>
+        </div>
+       
+    </main>
+    <script src="script.js" type="module"></script>
+    <script src="regist.js"></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+</body>
+</html>

@@ -141,9 +141,10 @@ input[type ="button"]{
     transition: 0.2s all ease-in-out;
 }
 #errorlogger{
-    font-size: 1em;
+    font-size: 0.8em;
     margin-top: 0.5em;
     color: red;
+    background-color: rgba(255,0,0, 0.2);
 }
 #nav{
     position: fixed;
