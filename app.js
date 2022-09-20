@@ -182,13 +182,14 @@ const expressInteractionMitApi = () =>{
 const serverWithQuery = ()=>{
     const express = require('express');
     const app = express();
-    const {usersarray} = require('./tagebuch/static/users.js')
+    const {usersarray,users} = require('./tagebuch/static/users.js')
     let newUsers = [...usersarray];
 
     app.get("/",(req,res)=>{
         res.send(newUsers)
     })
     app.get('/q', (req,res)=>{
+        //this will always be .query, and not .whatever your link is
         const {name,limit,id} = req.query;
         if(name){
             newUsers = newUsers.filter((user=>{
@@ -214,10 +215,103 @@ const serverWithQuery = ()=>{
         res.status(200).send(newUsers);
         
     })
+    //add the route param here
+    app.get('/:user', (req,res)=>{
+        const {user} = req.params; //this is the route and params. having :user in the link is the route
+        if(user in users){
+            const specuser = users[user];
+            res.send(specuser)
+        } else{
+            res.status(404).send('user does not exist')
+        }
+        
+    })
+    app.get("/:user/:details",(req,res)=>{
+        const {user,details} = req.params;
+        if(user in users){
+            if((details in users[user])){
+                res.status(200).send(`we have it: ${users[user][details]}`)
+            } else{
+                res.status(404).send('requested info not here')
+            }
+        } else{
+            res.status(404).send('user does not exist')
+        }
+    })
+    app.get("/q/:details",(req,res)=>{
+        const{name,limit,id} = req.query;
+        const {details} =req.params;
+
+        if(name){
+            newUsers = newUsers.filter((user)=>{
+                return user.username.startsWith(name);
+            })
+        }
+        if(limit){
+            newUsers = newUsers.slice(0,Number(limit))
+        }
+        if(id){
+            newUsers = newUsers.filter((users)=>{
+                return users.id === Number(id);
+            })
+        }
+
+        //notyetdone
+        res.send(newUsers);
+    })
 
 
     app.listen(port,()=>{
         console.log(`server listening on port:  ${port}`)
     })
 }
-serverWithQuery()
+//serverWithQuery()
+
+
+///using middleware.
+/**
+ * Middleware is basically what you use to apply a functionality
+ * to each route. also, instead of writing the middleware on each router, you
+ * can simply use app.use and this will be applied on all
+ * the routes below it. with app.use, order matters. every route abover it wont take the functionality.
+ * Also, the middleware function must take a next() callback function. to move on to the other codes in the route.
+ * 
+ * if you dont want app.use to apply to all route, you can include
+ * a path parameter as the first argument i.e. app.use('./vendors',callback)
+ * in this case, it'll only apply to routes that have the path /vendors
+ * 
+ * you can execute multiple middleware function by placing then in an array. 
+ */
+const middleswa = (req,res,next)=>{
+    const url = req.url;
+    const meth = req.method;
+    const time = new Date().getFullYear()
+
+    console.log(url,meth,time);
+    next();
+
+
+}
+const serverWithMiddleWare = ()=>{
+    const express = require('express');
+    const app = express();
+    const port = 5000;
+    app.use(middleswa);
+
+    app.get("/",(req,res)=>{
+        res.send('home')
+    })
+    app.get("/about",(req,res)=>{
+        res.send("about");        
+    })
+    app.get('/others',(req,res)=>{
+        res.send('others')
+    })
+
+
+    app.listen(port,()=>{
+        console.log(`server is listening on port ${port}`)
+    })
+}
+
+serverWithMiddleWare();
