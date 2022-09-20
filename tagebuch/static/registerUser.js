@@ -6,5 +6,4 @@ class RegisteringUser {
         this.password = password;    
     }
 }
-
 export {RegisteringUser};

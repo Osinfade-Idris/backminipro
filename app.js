@@ -126,5 +126,98 @@ const useExpressReadFile = () =>{
         console.log('server is listening on port 5000')
     })
 }
+//useExpressReadFile()
 
-useExpressReadFile()
+//API response
+
+const expressInteractionMitApi = () =>{
+    const {users} = require('./tagebuch/static/users.js')
+
+   
+    app.get('/', (req,res)=>{
+        //just pass in your json file here... So here, I'll read one of the arrays I have and send
+        //instead of reading, i should just require it as module.
+        //const obj = readFileSync('./tagebuch/static/regist.js', 'utf8')
+       // const {users} = require('./tagebuch/static/users.js')
+        res.json(users);
+
+    })
+
+    //using route and params
+
+    app.get('/:user', (req,res)=>{
+        const {user} = req.params; //this is the route and params. having :user in the link is the route
+        if(user in users){
+            const specuser = users[user];
+            res.send(specuser)
+        } else{
+            res.status(404).send('user does not exist')
+        }
+        
+    })
+    app.get("/:user/:details",(req,res)=>{
+        const {user,details} = req.params;
+        if(user in users){
+            if((details in users[user])){
+                res.status(200).send(`we have it: ${users[user][details]}`)
+            } else{
+                res.status(404).send('requested info not here')
+            }
+        } else{
+            res.status(404).send('user does not exist')
+        }
+    })
+    //query string parameter aka URI parameters
+
+
+    app.listen(port, ()=>{
+        console.log( `server is listening on port: ${port}`)
+    })
+}
+
+//expressInteractionMitApi();
+
+//working with query string
+
+const serverWithQuery = ()=>{
+    const express = require('express');
+    const app = express();
+    const {usersarray} = require('./tagebuch/static/users.js')
+    let newUsers = [...usersarray];
+
+    app.get("/",(req,res)=>{
+        res.send(newUsers)
+    })
+    app.get('/q', (req,res)=>{
+        const {name,limit,id} = req.query;
+        if(name){
+            newUsers = newUsers.filter((user=>{
+                return user.username.startsWith(name);
+            }))
+        }
+        if(limit){
+            //number here is used to convert string to number
+            newUsers = newUsers.slice(0,Number(limit))
+        }
+        if(id){
+            newUsers = newUsers.filter((user)=>{
+                return user.id === Number(id);
+            })
+        }
+        //if user is not in database
+        if(newUsers.length<1){
+          return  res.status(200).json({
+                response: "success",
+                data: "not found in database"
+            })
+        }
+        res.status(200).send(newUsers);
+        
+    })
+
+
+    app.listen(port,()=>{
+        console.log(`server listening on port:  ${port}`)
+    })
+}
+serverWithQuery()
