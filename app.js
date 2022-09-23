@@ -314,4 +314,153 @@ const serverWithMiddleWare = ()=>{
     })
 }
 
-serverWithMiddleWare();
+//serverWithMiddleWare();
+
+//johnsmila httpmethodexamples
+
+const serverMitHttpMethods = () =>{
+    const express = require('express');
+    const app = express();
+    const {people,products} = require('./data')
+    //access to ijncoming static asset
+    app.use(express.static('./methods-public'))
+    //this right here gives you access to the incoming form data
+    app.use(express.urlencoded({extended : false}))
+    //access to incoming json data
+    app.use(express.json())
+    
+    app.get('/api/people',(req,res)=>{
+        res.status(200).json({
+            success: true,
+            data: people
+        })
+    })
+    app.get('/api/people/:name', (req,res)=>{
+        const {name} = req.params;
+
+        const onePerson = people.find((person)=>{
+            return  person.name === name;
+        })
+        if(!onePerson){
+            return res.status(400).send({
+                success: true,
+                data: [],
+                mesg: 'Person does not exist'
+            })
+        }
+        res.status(200).json(onePerson);
+    })
+    app.get('/api/products',(req,res)=>{
+        res.json({
+            success: true,
+            data : products
+        })
+    })
+    app.get('/api/products/id/:id',(req,res)=>{
+        const {id} = req.params;
+        const singleProduct = products.find((product)=>{
+            return product.id === Number(id)
+        })
+        if(!singleProduct){
+            return res.status(200).json({
+                success: true,
+                data: [],
+                msg: 'product does not exist yet'
+            })
+        }
+        res.status(200).json({
+            success: true,
+            data: {
+                name : singleProduct.name,
+                desc: singleProduct.desc,
+                price: singleProduct.price
+            }
+        })
+    })
+    app.get('/api/products/q',(req,res)=>{
+        const {name,id,limit} = req.query;
+        let aProducts = [...products];
+
+        if(name){
+            aProducts = aProducts.filter((product)=>{
+                return product.name.startsWith(name);
+            })
+        }
+        if(id){
+             aProducts = aProducts.filter((product)=>{
+                return product.id === Number(id)
+            })
+        }
+        if(limit){
+            aProducts = aProducts.slice(0,Number(limit))
+        }
+
+        if(aProducts.length<1){
+            return res.status(404).json({
+                success: false,
+                data: [],
+                msg: "product does not exist"
+            })
+        } 
+       
+        res.status(404).json({
+            success: true,
+            data: aProducts,
+        })
+    }) 
+
+    app.post('/login',(req,res)=>{
+        const{name} = req.body;
+        if(name){
+           return res.status(200).send(`welcome ${name}`)
+        }
+        res.status(404).send('Please provide credentials')
+
+        //witghout urlencoded, you cannot have access to the request object
+        //this returns unde(req.body)fined
+    })
+    app.post('/api/people',(req,res)=>{
+        const{name} = req.body;
+        if(!name)
+        {
+            return res.status(400).json({
+                success: false,
+                msg: "Please provide creential"
+    
+            })
+        }
+        res.status(201).json({
+            success : true,
+            people : name
+        })
+    })
+    app.put('/api/people/:id', (req,res)=>{
+        const {id} = req.params;
+        //then what you want to change
+
+        const {name} = req.body;
+        const prod =  people.find((pers)=>{
+           return pers.id === Number(id)
+        })
+        if(!prod){
+            return res
+            .status(404)
+            .json({
+                success: false,
+                msg: `person with id: ${id} does not exist`
+            })
+        } else{
+            prod["name"] = name;
+
+        }
+        res.send(people)
+    })
+
+    app.listen(5000, ()=>{
+        console.log('server is listening on port 5000')
+    })
+}
+
+serverMitHttpMethods();
+
+//postman
